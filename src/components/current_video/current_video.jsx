@@ -13,8 +13,8 @@ const CurrentVideo = (props) => {
             width="720"
             height="405"
             src={`https://www.youtube.com/embed/${props.current.id}`}
-            frameborder="0"
-            allowfullscreen
+            frameBorder="0"
+            allowFullScreen
           ></iframe>
         ) : (
           <div />

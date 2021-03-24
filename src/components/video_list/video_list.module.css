@@ -10,7 +10,6 @@ ul {
   display: flex;
   flex-flow: column;
   width: 30%;
-  background-color: hotpink;
 }
 @media screen and (max-width: 650px) {
   .sideList {

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import './app.css';
-import Header from './components/header';
+import styles from './app.module.css';
+import SearchHeader from './components/search_header/search_header';
 import VideoList from './components/video_list/video_list';
 import CurrentVideo from './components/current_video/current_video';
 
-function App() {
+function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [current, setCurrent] = useState([]);
 
@@ -12,46 +12,30 @@ function App() {
     setCurrent({ id });
   };
 
-  const onSubmit = (submit) => {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
-
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${submit}&key=AIzaSyAoCeHp23AoSg1iePAbzoc7-vpCq0E9xjQ`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => setVideos(result.items))
-      .catch((error) => console.log('error', error));
+  const search = (submit) => {
+    youtube
+      .search(submit) //
+      .then((videos) => setVideos(videos));
   };
 
-  const mostPopular = () => {
-    const requestOptions = {
-      method: 'GET',
-      redirect: 'follow',
-    };
-
-    fetch(
-      'https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=24&key=AIzaSyAoCeHp23AoSg1iePAbzoc7-vpCq0E9xjQ',
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => setVideos(result.items))
-      .catch((error) => console.log('error', error));
+  const goHome = () => {
+    youtube
+      .mostPopular() //
+      .then((videos) => setVideos(videos));
   };
 
-  useEffect(() => mostPopular(), []);
+  useEffect(
+    () =>
+      youtube
+        .mostPopular() //
+        .then((videos) => setVideos(videos)),
+    []
+  );
 
   return (
-    <div>
-      <Header
-        onSubmit={onSubmit}
-        onCurrent={onCurrent}
-        mostPopular={mostPopular}
-      />
-      <div className="contents">
+    <div className={styles.app}>
+      <SearchHeader search={search} onCurrent={onCurrent} goHome={goHome} />
+      <div className={styles.contents}>
         <CurrentVideo current={current} onCurrent={onCurrent} />
         <VideoList videos={videos} current={current} onCurrent={onCurrent} />
       </div>

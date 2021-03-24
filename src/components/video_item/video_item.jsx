@@ -4,8 +4,7 @@ import styles from './video_item.module.css';
 const VideoItem = (props) => {
   const onItemClick = (event) => {
     console.log(props.video);
-    const id = props.video.id.videoId ? props.video.id.videoId : props.video.id;
-    props.onCurrent(id);
+    props.onCurrent(props.video.id);
   };
   return (
     <li className={props.current.id ? styles.sideContainer : styles.container}>

@@ -1,43 +1,33 @@
-* {
-  box-sizing: border-box;
-  list-style: none;
-}
-button {
-  outline: none;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-}
 /* ------------------Header------------------ */
-.searchBar {
+.header {
   display: flex;
   background-color: rgb(36, 36, 36);
-  padding: 1rem;
   height: 3.5rem;
   align-items: center;
+  padding: 1em;
 }
-.searchBar_logo .fa-youtube {
-  color: red;
-  margin-right: 0.5rem;
-}
-.searchBar_logo {
-  font-size: 1.5rem;
+.logo {
+  display: flex;
+  align-items: center;
   background-color: transparent;
   color: snow;
   margin-right: 0.5rem;
 }
-.searchBar_form {
+.logo img {
+  margin-right: 1em;
+}
+.form {
   flex-grow: 1;
   display: flex;
 }
-.searchBar_text {
+.text {
   outline-style: none;
   border-style: none;
   height: 2rem;
   border-radius: 4px;
   flex-grow: 1;
 }
-.searchBar_submit {
+.submit {
   outline-style: none;
   border-style: none;
   width: 2rem;
@@ -45,14 +35,4 @@ button {
   background-color: rgb(63, 63, 63);
   color: rgb(151, 151, 151);
   font-size: 1rem;
-}
-/* ------------------body------------------ */
-.contents {
-  display: flex;
-}
-
-@media screen and (max-width: 650px) {
-  .contents {
-    flex-direction: column;
-  }
 }
