@@ -1,0 +1,19 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+.videoList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sideList {
+  display: flex;
+  flex-flow: column;
+  width: 30%;
+  background-color: hotpink;
+}
+@media screen and (max-width: 650px) {
+  .sideList {
+    width: 100%;
+  }
+}
