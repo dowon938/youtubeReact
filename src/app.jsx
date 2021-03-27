@@ -6,16 +6,18 @@ import CurrentVideo from './components/current_video/current_video';
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
-  const [current, setCurrent] = useState([]);
+  const [current, setCurrent] = useState(null);
+  const [comments, setComments] = useState(null);
+  const currentOn = current ? 'list' : 'grid';
 
-  const onCurrent = (id) => {
-    setCurrent({ id });
+  const onCurrent = (video) => {
+    video == null ? setCurrent(null) : setCurrent({ video });
   };
 
   const search = (submit) => {
     youtube
       .search(submit) //
-      .then((videos) => setVideos(videos));
+      .then((videos) => setVideos(videos), setCurrent(null));
   };
 
   const goHome = () => {
@@ -24,20 +26,54 @@ function App({ youtube }) {
       .then((videos) => setVideos(videos));
   };
 
+  const getComments = (id) => {
+    youtube
+      .comments(id) //
+      .then((items) =>
+        items
+          ? items.map((item) => ({
+              ...item.snippet.topLevelComment.snippet,
+            }))
+          : items
+      )
+      .then((comment) => setComments(comment));
+  };
+
   useEffect(
     () =>
       youtube
         .mostPopular() //
         .then((videos) => setVideos(videos)),
-    []
+    [youtube]
   );
 
   return (
     <div className={styles.app}>
-      <SearchHeader search={search} onCurrent={onCurrent} goHome={goHome} />
+      <SearchHeader
+        search={search}
+        onCurrent={onCurrent}
+        goHome={goHome}
+        getComments={getComments}
+      />
       <div className={styles.contents}>
-        <CurrentVideo current={current} onCurrent={onCurrent} />
-        <VideoList videos={videos} current={current} onCurrent={onCurrent} />
+        {current && (
+          <div className={styles.video}>
+            <CurrentVideo
+              current={current}
+              onCurrent={onCurrent}
+              comments={comments}
+            />
+          </div>
+        )}
+        <div className={styles.list}>
+          <VideoList
+            videos={videos}
+            current={current}
+            onCurrent={onCurrent}
+            getComments={getComments}
+            currentOn={currentOn}
+          />
+        </div>
       </div>
     </div>
   );

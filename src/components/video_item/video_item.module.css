@@ -2,9 +2,12 @@
   width: 50%;
   padding: 0.2em;
 }
-.sideContainer {
+
+.list {
   width: 100%;
+  padding: 0.2em;
 }
+
 .video {
   display: flex;
   border: silver solid 1px;

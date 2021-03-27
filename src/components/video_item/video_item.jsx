@@ -3,11 +3,12 @@ import styles from './video_item.module.css';
 
 const VideoItem = (props) => {
   const onItemClick = (event) => {
-    console.log(props.video);
-    props.onCurrent(props.video.id);
+    props.onCurrent(props.video);
+    props.getComments(props.video.id);
   };
+  const currentOn = props.currentOn == 'list' ? styles.list : styles.grid;
   return (
-    <li className={props.current.id ? styles.sideContainer : styles.container}>
+    <li className={`${styles.container} ${currentOn}`}>
       <div className={styles.video} onClick={onItemClick}>
         <div className={styles.thumbnails}>
           <img

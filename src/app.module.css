@@ -4,7 +4,12 @@
 .contents {
   display: flex;
 }
-
+.video {
+  flex: 1 1 70%;
+}
+.list {
+  flex: 1 1 30%;
+}
 @media screen and (max-width: 650px) {
   .contents {
     flex-direction: column;
