@@ -44,6 +44,8 @@ class Youtube {
     });
     return response.data.items;
   }
+
+  list() {}
 }
 
 export default Youtube;
