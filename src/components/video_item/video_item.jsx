@@ -6,7 +6,7 @@ const VideoItem = (props) => {
     props.onCurrent(props.video);
     props.getComments(props.video.id);
   };
-  const currentOn = props.currentOn == 'list' ? styles.list : styles.grid;
+  const currentOn = props.currentOn === 'list' ? styles.list : styles.grid;
   return (
     <li className={`${styles.container} ${currentOn}`}>
       <div className={styles.video} onClick={onItemClick}>
@@ -18,9 +18,7 @@ const VideoItem = (props) => {
         </div>
         <div className={styles.description}>
           <p className={styles.title}>{props.video.snippet.title}</p>
-          <p className={styles.channelTitle}>
-            {props.video.snippet.channelTitle}
-          </p>
+          <p className={styles.channelTitle}>{props.video.snippet.channelTitle}</p>
         </div>
       </div>
     </li>
